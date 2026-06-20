@@ -1,12 +1,12 @@
 [
   {
-    "title": "Ma première vidéo sur Dema",
-    "channel": "Dema Studio",
+    "title": "Ma première vidéo",
+    "channelId": "dema-studio",
     "url": "https://youtube.com"
   },
   {
     "title": "Gameplay Fortnite",
-    "channel": "PlayerX",
+    "channelId": "playerx",
     "url": "https://youtube.com"
   }
 ]
