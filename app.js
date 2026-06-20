@@ -84,3 +84,37 @@ async function loadSection(type) {
 
 // charger les chaînes au démarrage
 loadChannels();
+
+async function loadChannelsPage() {
+  const container = document.getElementById("content");
+
+  const res = await fetch("data/channels.json");
+  const data = await res.json();
+
+  container.innerHTML = "<h2>Chaînes</h2>";
+
+  data.forEach(channel => {
+    const card = document.createElement("div");
+
+    card.style.margin = "10px 0";
+    card.style.padding = "12px";
+    card.style.background = "#222";
+    card.style.borderRadius = "10px";
+    card.style.display = "flex";
+    card.style.alignItems = "center";
+    card.style.gap = "15px";
+
+    card.innerHTML = `
+      <img src="${channel.avatar}" style="width:60px; height:60px; border-radius:50%;">
+      <div>
+        <h3 style="margin:0;">${channel.name}</h3>
+        <p style="margin:5px 0; color:gray;">${channel.bio}</p>
+        <button onclick="viewChannel('${channel.id}')" style="padding:5px 10px; background:#333; color:white; border:none; cursor:pointer;">
+          Voir chaîne
+        </button>
+      </div>
+    `;
+
+    container.appendChild(card);
+  });
+}
