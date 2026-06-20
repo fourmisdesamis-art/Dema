@@ -118,3 +118,42 @@ async function loadChannelsPage() {
     container.appendChild(card);
   });
 }
+
+async function viewChannel(id) {
+  const container = document.getElementById("content");
+
+  const resVideos = await fetch("data/videos.json");
+  const videos = await resVideos.json();
+
+  const resChannels = await fetch("data/channels.json");
+  const channels = await resChannels.json();
+
+  const channel = channels.find(c => c.id === id);
+  const channelVideos = videos.filter(v => v.channelId === id);
+
+  container.innerHTML = `
+    <div style="padding:10px;">
+      <img src="${channel.avatar}" style="width:80px;height:80px;border-radius:50%;">
+      <h2>${channel.name}</h2>
+      <p style="color:gray;">${channel.bio}</p>
+      <hr>
+      <h3>Vidéos</h3>
+    </div>
+  `;
+
+  channelVideos.forEach(video => {
+    const card = document.createElement("div");
+
+    card.style.margin = "10px 0";
+    card.style.padding = "10px";
+    card.style.background = "#222";
+    card.style.borderRadius = "10px";
+
+    card.innerHTML = `
+      <h4>${video.title}</h4>
+      <a href="${video.url}" target="_blank" style="color:#4ea1ff;">Voir</a>
+    `;
+
+    container.appendChild(card);
+  });
+}
